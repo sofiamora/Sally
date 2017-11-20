@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Base Sally</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet"/>
+    <link th:href="@{/js/plugins/gritter/jquery.gritter.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
     <div id="wrapper">
@@ -172,7 +172,7 @@
                             <li><a href="video.html">Video</a></li>
                             <li><a href="tabs_panels.html">Panels</a></li>
                             <li><a href="tabs.html">Tabs</a></li>
-                            <li><a href="notifications.html">Notifications & Tooltips</a></li>
+                            <li><a href="notifications.html">Notifications  Tooltips</a></li>
                             <li><a href="helper_classes.html">Helper css classes</a></li>
                             <li><a href="badges_labels.html">Badges, Labels, Progress</a></li>
                         </ul>
@@ -254,11 +254,6 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
           <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-          <form role="search" class="navbar-form-custom" action="search_results.html">
-            <div class="form-group">
-              <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-            </div>
-          </form>
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -272,11 +267,11 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    <img alt="image" class="img-circle" th:src="@{/img/a7.jpg}"/>
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br/>
                                     <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                 </div>
                             </div>
@@ -285,11 +280,11 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a4.jpg">
+                                    <img alt="image" class="img-circle" th:src="@{/img/a4.jpg}"/>
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br/>
                                     <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
                                 </div>
                             </div>
@@ -298,11 +293,11 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/profile.jpg">
+                                    <img alt="image" class="img-circle" th:src="@{/img/profile.jpg}"/>
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br/>
                                     <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
                                 </div>
                             </div>
@@ -375,26 +370,28 @@
 
         </nav>
         </div>
+        </div>
         <div class="row  border-bottom white-bg dashboard-header">
           <!--Content here-->
         </div>
-            <script src="js/jquery-3.1.1.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-            <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-            <script src="js/plugins/flot/jquery.flot.js"></script>
-            <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-            <script src="js/plugins/flot/jquery.flot.spline.js"></script>
-            <script src="js/plugins/flot/jquery.flot.resize.js"></script>
-            <script src="js/plugins/flot/jquery.flot.pie.js"></script>
-            <script src="js/plugins/peity/jquery.peity.min.js"></script>
-            <script src="js/demo/peity-demo.js"></script>
-            <script src="js/inspinia.js"></script>
-            <script src="js/plugins/pace/pace.min.js"></script>
-            <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
-            <script src="js/plugins/gritter/jquery.gritter.min.js"></script>
-            <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
-            <script src="js/plugins/chartJs/Chart.min.js"></script>
-            <script src="js/plugins/toastr/toastr.min.js"></script>
+     </div>
+            <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+            <script th:src="@{/js/bootstrap.min.js}"></script>
+            <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+            <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.tooltip.min.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.spline.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.resize.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.pie.js}"></script>
+            <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+            <script th:src="@{/js/demo/peity-demo.js}"></script>
+            <script th:src="@{/js/inspinia.js}"></script>
+            <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+            <script th:src="@{/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
+            <script th:src="@{/js/plugins/gritter/jquery.gritter.min.js}"></script>
+            <script th:src="@{/js/plugins/sparkline/jquery.sparkline.min.js}"></script>
+            <script th:src="@{/js/plugins/chartJs/Chart.min.js}"></script>
+            <script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
     </body>
 </html>
