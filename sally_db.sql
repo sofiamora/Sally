@@ -1,3 +1,1 @@
-drop database if exists sally;
-create database sally;
-use sally;
+drop database sally;
