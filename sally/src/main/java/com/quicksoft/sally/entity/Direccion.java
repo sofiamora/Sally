@@ -1,4 +1,4 @@
-package entity;
+package com.quicksoft.sally.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

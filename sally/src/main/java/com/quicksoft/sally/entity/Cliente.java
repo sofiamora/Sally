@@ -1,10 +1,13 @@
-package entity;
+package com.quicksoft.sally.entity;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,6 +47,12 @@ public class Cliente {
 	@OneToOne(fetch=FetchType.EAGER)
 	@Column(name="id_ocupacion")
 	private Ocupacion ocupacion;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Contacto> contactos;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Plantilla> plantillas;
 	
 	public Cliente() {
 	}
@@ -122,7 +131,14 @@ public class Cliente {
 	public void setOcupacion(Ocupacion ocupacion) {
 		this.ocupacion = ocupacion;
 	}
+
+	public List<Contacto> getContactos() {
+		return contactos;
+	}
+
+	public void setContactos(List<Contacto> contactos) {
+		this.contactos = contactos;
+	}
 	
-		
 	
 }
