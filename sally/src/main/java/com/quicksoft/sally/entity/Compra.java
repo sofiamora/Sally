@@ -35,10 +35,8 @@ public class Compra {
 	private String paymentId;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@Column(name="id_tipoPago")
 	private TipoPago tipoPago;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@Column(name="id_moneda")
 	private Moneda moneda;
 }

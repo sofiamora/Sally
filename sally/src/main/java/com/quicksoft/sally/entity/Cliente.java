@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,11 +42,11 @@ public class Cliente {
 	private Integer edad;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@Column(name="id_rol")
+	@JoinColumn(name="fk_rol")
 	private Rol rol;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@Column(name="id_ocupacion")
+	@JoinColumn(name="fk_ocupacion")
 	private Ocupacion ocupacion;
 	
 	@OneToMany(mappedBy="cliente")

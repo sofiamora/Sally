@@ -40,7 +40,6 @@ public class Direccion {
 	
 	/*Mapeo One To One el que recibe la llave foranea es el que especifica el mapeo*/
 	@OneToOne(fetch=FetchType.EAGER)
-	@Column(name="id_cliente")
 	private Cliente cliente;
 	
 	public Direccion() {
