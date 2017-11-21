@@ -25,15 +25,18 @@
 	</properties>
 
 	<dependencies>
+		<!-- Thymeleaf: Sistema de templates para las vistas en Java -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!-- Web Starter: Agrega las dependencias y configuraciones
+		 para el uso de	Apache, Tomcat, entre otros -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<!-- Test Starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -46,6 +49,17 @@
 	        <artifactId>spring-boot-devtools</artifactId>
 	        <optional>true</optional>
 	    </dependency>
+	    <!-- JPA: Configuraciones para realizar mapeos a través de anotaciones con sintaxis JPA
+    	 mediante el uso de un Entity Manager --> 	
+     	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+         <!-- Use MySQL Connector-J: Permite una conexion "directa" con una BD MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
