@@ -66,4 +66,13 @@ public class CriterioId implements Serializable{
 		this.idPlantilla = idPlantilla;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

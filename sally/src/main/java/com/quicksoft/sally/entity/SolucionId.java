@@ -54,5 +54,14 @@ public class SolucionId implements Serializable{
 		this.idCliente = idCliente;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 	
 }
