@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.quicksoft.sally.service.LandingService;
+import com.quicksoft.sally.entity.Cliente;
+import com.quicksoft.sally.service.ClienteService;
+
 
 @Controller
 @RequestMapping("/sally")
@@ -18,8 +20,8 @@ public class LandingController {
 	public static final String REGISTRO_VIEW = "registro";
 	
 	@Autowired
-	@Qualifier("landingService")
-	private LandingService LandingService;
+	@Qualifier("clienteService")
+	private ClienteService LandingService;
 	
 	@GetMapping("/inicio")
 	public ModelAndView inicio() {
@@ -33,7 +35,8 @@ public class LandingController {
 	
 	@GetMapping("/registro")
 	public ModelAndView registro() {
-		LandingService.registrarCliente();
+		Cliente cliente = new Cliente();
+		LandingService.registrarCliente(cliente);
 		return new ModelAndView(REGISTRO_VIEW);
 	}
 }
