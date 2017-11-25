@@ -42,7 +42,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!--SpringBootDevTools agrega configuraciones para el entorno desarrollo como
+		HotSwapping que permiten recargar en las plantillas sin tener que reiniciar el servidor
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <optional>true</optional>
+	    </dependency>-->
 	    <!-- JPA: Configuraciones para realizar mapeos a través de anotaciones con sintaxis JPA
     	 mediante el uso de un Entity Manager --> 	
      	<dependency>

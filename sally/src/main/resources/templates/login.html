@@ -12,6 +12,12 @@
 <body class="gray-bg">
     <div class="loginColumns animated fadeInDown">
         <div class="row">
+            <div class="alert alert-danger" th:if="${error != null}">
+                El correo o la contraseña ingresados son incorrectos, inténtalo de nuevo.
+            </div>
+            <div class="alert alert-info" th:if="${logout != null}">
+                ¡Sesión terminada con éxito, que tenga un buen día!
+            </div>
             <div class="col-md-6">
                 <h2 class="font-bold">Bienvenido a Sally</h2>
                 <p>
@@ -32,12 +38,12 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <form class="m-t" role="form" action="index.html">
+                    <form class="m-t" role="form" action="#" method="post" th:action="@{/sally/login}" th:object="${clienteLogin}">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Correo electrónico" required="true"/>
+                            <input type="email" th:field="*{correo}" class="form-control" placeholder="Correo electrónico" required="true"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Contraseña" required="true"/>
+                            <input type="password" th:field="*{contraseña}" class="form-control" placeholder="Contraseña" required="true"/>
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
 

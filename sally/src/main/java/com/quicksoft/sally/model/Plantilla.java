@@ -2,13 +2,13 @@ package com.quicksoft.sally.model;
 
 public class Plantilla {
 	private Integer estatus;
-	private Cliente creador;
-	private Cliente dueño;
+	private ClienteModel creador;
+	private ClienteModel dueño;
 	private String objetivo;
 	public Plantilla() {
 		super();
 	}
-	public Plantilla(Integer estatus, Cliente creador, Cliente dueño, String objetivo) {
+	public Plantilla(Integer estatus, ClienteModel creador, ClienteModel dueño, String objetivo) {
 		super();
 		this.estatus = estatus;
 		this.creador = creador;
@@ -21,16 +21,16 @@ public class Plantilla {
 	public void setEstatus(Integer estatus) {
 		this.estatus = estatus;
 	}
-	public Cliente getCreador() {
+	public ClienteModel getCreador() {
 		return creador;
 	}
-	public void setCreador(Cliente creador) {
+	public void setCreador(ClienteModel creador) {
 		this.creador = creador;
 	}
-	public Cliente getDueño() {
+	public ClienteModel getDueño() {
 		return dueño;
 	}
-	public void setDueño(Cliente dueño) {
+	public void setDueño(ClienteModel dueño) {
 		this.dueño = dueño;
 	}
 	public String getObjetivo() {

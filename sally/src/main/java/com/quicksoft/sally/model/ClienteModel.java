@@ -1,13 +1,15 @@
 package com.quicksoft.sally.model;
 
-public class Cliente {
+public class ClienteModel {
 	private String nombreUsuario;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
+	private String correo;
+	private String contraseña;
 	private String sexo;
 	private Integer edad;
 	
-	public Cliente() {
+	public ClienteModel() {
 		super();
 	}
 	
@@ -40,6 +42,22 @@ public class Cliente {
 	}
 	public void setEdad(Integer edad) {
 		this.edad = edad;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
 	}
 	
 	

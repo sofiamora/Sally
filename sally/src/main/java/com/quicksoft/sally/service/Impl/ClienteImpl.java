@@ -35,6 +35,7 @@ public class ClienteImpl implements ClienteService{
 
 	@Override
 	public Cliente login(String correo, String contraseña) {
+		logger.info("Login: "+correo+" pass: "+contraseña);
 		return clienteRepository.findByCorreoAndContraseña(correo, contraseña);
 	}
 
