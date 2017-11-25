@@ -18,6 +18,9 @@
             <div class="alert alert-info" th:if="${logout != null}">
                 ¡Sesión terminada con éxito, que tenga un buen día!
             </div>
+            <div class="alert alert-success" th:if="${success == 1}">
+                ¡Registro exitoso, ahora puedes iniciar sesión!
+            </div>
             <div class="col-md-6">
                 <h2 class="font-bold">Bienvenido a Sally</h2>
                 <p>

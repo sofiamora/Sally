@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.quicksoft.sally.constants.Constants;
 import com.quicksoft.sally.converter.ClienteConverter;
 import com.quicksoft.sally.entity.Cliente;
 import com.quicksoft.sally.model.ClienteModel;
@@ -23,13 +24,8 @@ import com.quicksoft.sally.service.ClienteService;
 @RequestMapping("/sally")
 public class LandingController {
 	
-	public static final String LANDING_VIEW = "landing";
-	public static final String LOGIN_VIEW = "login";
-	public static final String REGISTRO_VIEW = "registro";
-	private static final String DASHBOARD_VIEW = "dashboard";
-	
 	private static final Log logger = LogFactory.getLog(LandingController.class);
-	
+	private int result;
 	@Autowired
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
@@ -40,7 +36,7 @@ public class LandingController {
 	
 	@GetMapping("/inicio")
 	public ModelAndView inicio() {
-		return new ModelAndView(LANDING_VIEW);
+		return new ModelAndView(Constants.LANDING_VIEW);
 	}
 	
 	@GetMapping("/login")
@@ -50,7 +46,9 @@ public class LandingController {
 		model.addAttribute("clienteLogin", new ClienteModel());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return new ModelAndView(LOGIN_VIEW);
+		model.addAttribute("success", result);
+		result=0;
+		return new ModelAndView(Constants.LOGIN_VIEW);
 	}
 	
 	@PostMapping("/login")
@@ -58,9 +56,9 @@ public class LandingController {
 		String redirect;
 		Cliente cliente = clienteService.login(clienteModel.getCorreo(),clienteModel.getContraseña());
 		if(cliente!=null) {
-			redirect = DASHBOARD_VIEW;
+			redirect = Constants.DASHBOARD_VIEW;
 		}else {
-			redirect = "sally/"+LOGIN_VIEW+"?error";
+			redirect = "sally/"+Constants.LOGIN_VIEW+"?error";
 		}
 		return "redirect:/"+redirect;
 	}
@@ -68,14 +66,22 @@ public class LandingController {
 	@GetMapping("/registro")
 	public ModelAndView formularioCliente(Model model) {
 		model.addAttribute("clienteRegistro",new ClienteModel());
-		return new ModelAndView(REGISTRO_VIEW);
+		return new ModelAndView(Constants.REGISTRO_VIEW);
 	}
 	
 	@PostMapping("/cliente")
 	public String registrarCliente(@ModelAttribute("clienteRegistro")ClienteModel clienteModel){
+		String redirect;
 		Cliente cliente = clienteConverter.modelToEntity(clienteModel);
-		logger.info("Registrando a: "+clienteModel.getCorreo());
-		clienteService.registrarCliente(cliente);
-		return "redirect:/sally/"+LOGIN_VIEW;
+		cliente = clienteService.registrarCliente(cliente);
+		if(cliente!=null) {
+			result=1;
+			redirect = Constants.LOGIN_VIEW;
+			logger.info("Registrando a: "+clienteModel.getCorreo());
+		}else{
+			result=0;
+			redirect = Constants.REGISTRO_VIEW+"?error";
+		}
+		return "redirect:/sally/"+redirect;
 	}
 }
