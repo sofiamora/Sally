@@ -3,7 +3,20 @@ spring:
     url: jdbc:mysql://localhost:3306/sally
     username: sally
     password: sally
-    
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: soportesally2017@gmail.com
+    password: sally123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  freemarker:
+    template-loader-path: classpath:/templates
+    suffix: .ftl
   jpa:
     show-sql: true
     hibernate:

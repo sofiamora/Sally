@@ -25,7 +25,8 @@ import com.quicksoft.sally.service.ClienteService;
 public class LandingController {
 	
 	private static final Log logger = LogFactory.getLog(LandingController.class);
-	private int result;
+	private int registroExitoso;
+	
 	@Autowired
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
@@ -46,8 +47,8 @@ public class LandingController {
 		model.addAttribute("clienteLogin", new ClienteModel());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		model.addAttribute("success", result);
-		result=0;
+		model.addAttribute("success", registroExitoso);
+		registroExitoso=Constants.MSG_DEFAULT;
 		return new ModelAndView(Constants.LOGIN_VIEW);
 	}
 	
@@ -64,8 +65,9 @@ public class LandingController {
 	}
 	
 	@GetMapping("/registro")
-	public ModelAndView formularioCliente(Model model) {
+	public ModelAndView formularioCliente(Model model, @RequestParam(name="error", required=false)String error) {
 		model.addAttribute("clienteRegistro",new ClienteModel());
+		model.addAttribute("error", error);
 		return new ModelAndView(Constants.REGISTRO_VIEW);
 	}
 	
@@ -75,11 +77,12 @@ public class LandingController {
 		Cliente cliente = clienteConverter.modelToEntity(clienteModel);
 		cliente = clienteService.registrarCliente(cliente);
 		if(cliente!=null) {
-			result=1;
+			clienteService.notificarRegistro(cliente);
+			registroExitoso=Constants.MSG_EXITO;
 			redirect = Constants.LOGIN_VIEW;
 			logger.info("Registrando a: "+clienteModel.getCorreo());
 		}else{
-			result=0;
+			registroExitoso=Constants.MSG_DEFAULT;
 			redirect = Constants.REGISTRO_VIEW+"?error";
 		}
 		return "redirect:/sally/"+redirect;

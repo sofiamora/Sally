@@ -30,6 +30,7 @@ public class ClienteConverter {
 		cliente.setContraseña(model.getContraseña());
 		cliente.setSexo(cliente.getSexo());
 		cliente.setEdad(model.getEdad());
+		System.out.println("cliente: "+cliente.toString());
 		return cliente;
 	}
 }
