@@ -6,7 +6,8 @@
     <title>Sally Registro</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
-    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet"/>
+    <link th:href="@{/js/plugins/gritter/jquery.gritter.css}" rel="stylesheet"/>
     <link th:href="@{/css/animate.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
@@ -18,20 +19,23 @@
             </div>
             <h3>Formulario de Registro</h3>
             <p>Crea una cuenta y descubre todo lo que tenemos para tí.</p>
+            <div class="alert alert-danger" th:if="${error != null}">
+                El usuario no pudo ser registrado, inténtalo más tarde
+            </div>
             <form class="m-t" role="form" method="post" action="#" th:action="@{/sally/cliente}" th:object="${clienteRegistro}">
                 <div class="form-group">
-                    <input type="text" th:field="*{nombreUsuario}" class="form-control" placeholder="Nombre de usuario" required="true"/>
+                    <input type="text" id="txtNombre" th:field="*{nombreUsuario}" class="form-control" placeholder="Nombre de usuario" required="true"/>
                 </div>
                 <div class="form-group">
-                    <input type="email" th:field="*{correo}" class="form-control" placeholder="Correo electrónico" required="true"/>
+                    <input type="email" id="txtCorreo" th:field="*{correo}" class="form-control" placeholder="Correo electrónico" required="true"/>
                 </div>
                 <div class="form-group">
-                    <input type="password" th:field="*{contraseña}" class="form-control" placeholder="Contraseña" required="true"/>
+                    <input type="password" id="txtPass" th:field="*{contraseña}" class="form-control" placeholder="Contraseña" required="true"/>
                 </div>
                 <div class="form-group">
                         <div class="checkbox i-checks"><label> <input type="checkbox"/><i></i> Acepto los términos y condiciones </label></div>
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Registrarse</button>
+                <button type="submit" id="btnRegistro" class="btn btn-primary block full-width m-b">Registrarse</button>
 
                 <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="/sally/login">Login</a>
@@ -39,20 +43,50 @@
             <p class="m-t"> <small>Sally tu asistente personal &copy; 2017</small> </p>
         </div>
     </div>
+ <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+            <script th:src="@{/js/bootstrap.min.js}"></script>
+            <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+            <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.tooltip.min.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.spline.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.resize.js}"></script>
+            <script th:src="@{/js/plugins/flot/jquery.flot.pie.js}"></script>
+            <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+            <script th:src="@{/js/demo/peity-demo.js}"></script>
+            <script th:src="@{/js/inspinia.js}"></script>
+            <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+            <script th:src="@{/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
+            <script th:src="@{/js/plugins/gritter/jquery.gritter.min.js}"></script>
+            <script th:src="@{/js/plugins/sparkline/jquery.sparkline.min.js}"></script>
+            <script th:src="@{/js/plugins/chartJs/Chart.min.js}"></script>
+            <script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+            <script>
+            <![CDATA[
+            $(document).ready(function() {
+            	 
+            		$("#btnRegistro").click(function(){
+            		var a = $("#txtNombre");
+            		var b = $("#txtPass");
+            		var c = $("#txtCorreo");
+            		if(a.text() != "" && b.text() != "" && c.text()!=""){
+            			setTimeout(function() {
+                            toastr.options = {
+                                closeButton: true,
+                                progressBar: true,
+                                showMethod: 'slideDown',
+                                timeOut: 4000
+                            };
+                            toastr.success('¡Bienvenido!', 'Hola soy Sally');
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
+                        }, 1300);
+            		}
+            		
+            	})
+            	
+            })
+            ]]>
+            </script>
 </body>
 
 </html>
