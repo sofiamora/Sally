@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -44,6 +45,7 @@ public class ClienteImpl implements ClienteService, UserDetailsService{
 	@Qualifier("clienteRepository")
 	private ClienteRepository clienteRepository;
 	
+	private BCryptPasswordEncoder bpe;
 	private JavaMailSender javaMailSender;
 	private static final Log logger = LogFactory.getLog(ClienteImpl.class);
 	
@@ -55,6 +57,8 @@ public class ClienteImpl implements ClienteService, UserDetailsService{
 	@Override
 	public Cliente registrarCliente(Cliente cliente) {
 		logger.info("Registrando un cliente: "+System.currentTimeMillis());
+		bpe = new BCryptPasswordEncoder();
+		cliente.setContraseña(bpe.encode(cliente.getContraseña()));
 		cliente.setEnabled(true);
 		return clienteRepository.save(cliente);
 	}
@@ -81,9 +85,10 @@ public class ClienteImpl implements ClienteService, UserDetailsService{
 	}
 
 	@Override
-	public int modificarPassword(Integer idCliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Cliente modificarPassword(Cliente cliente) {
+		bpe = new BCryptPasswordEncoder();
+		cliente.setContraseña(bpe.encode(cliente.getContraseña()));
+		return clienteRepository.save(cliente);
 	}
 
 	@Override

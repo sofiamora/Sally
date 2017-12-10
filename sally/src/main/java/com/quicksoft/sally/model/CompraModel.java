@@ -2,7 +2,7 @@ package com.quicksoft.sally.model;
 
 import java.util.Date;
 
-public class Compra {
+public class CompraModel {
 	private String customerId;
 	private String compañia;
 	private Double precio;
@@ -13,11 +13,11 @@ public class Compra {
 	private String paymetnId;
 	private Date fecha;
 	
-	public Compra() {
+	public CompraModel() {
 		super();
 	}
 	
-	public Compra(String customerId, String compañia, Double precio, MetodoPago metodoPago, String moneda,
+	public CompraModel(String customerId, String compañia, Double precio, MetodoPago metodoPago, String moneda,
 			String descripción, String numeroReferencia, String paymetnId, Date fecha) {
 		super();
 		this.customerId = customerId;

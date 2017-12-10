@@ -9,5 +9,5 @@ public interface ClienteService {
 	public abstract Cliente login(String correo, String contraseña);
 	public abstract int notificarRegistro(Cliente cliente);
 	public abstract int eliminarCliente(Integer idCliente);
-	public abstract int modificarPassword(Integer idCliente);
+	public abstract Cliente modificarPassword(Cliente idCliente);
 }

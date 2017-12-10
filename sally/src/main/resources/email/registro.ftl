@@ -36,6 +36,7 @@
             <td bgcolor="#2f4050" style="padding: 30px 30px 30px 30px; color:white;">
                 <p style="color: white !important;">Correo: ${correo}</p>
                 <p>Contraseña: ${contra}</p>
+                <p><i>¡Todas tus contraseñas serán cifradas por seguridad!</i></p>
             </td>
         </tr>
     </table>

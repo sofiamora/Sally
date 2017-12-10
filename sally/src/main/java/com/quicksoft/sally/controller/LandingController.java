@@ -26,6 +26,7 @@ public class LandingController {
 	
 	private static final Log logger = LogFactory.getLog(LandingController.class);
 	private int registroExitoso;
+	private int passExitoso;
 	
 	@Autowired
 	@Qualifier("clienteService")
@@ -48,7 +49,9 @@ public class LandingController {
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
 		model.addAttribute("success", registroExitoso);
+		model.addAttribute("pass", passExitoso);
 		registroExitoso=Constants.MSG_DEFAULT;
+		passExitoso=Constants.MSG_DEFAULT;
 		return new ModelAndView(Constants.LOGIN_VIEW);
 	}
 	
@@ -78,6 +81,32 @@ public class LandingController {
 		}else{
 			registroExitoso=Constants.MSG_DEFAULT;
 			redirect = Constants.REGISTRO_VIEW+"?error";
+		}
+		return "redirect:/sally/"+redirect;
+	}
+	
+	@GetMapping("/password")
+	public ModelAndView formularioPassword(Model model, @RequestParam(name="error", required=false)String error) {
+		model.addAttribute("clientePassword",new ClienteModel());
+		model.addAttribute("error",error);
+		return new ModelAndView(Constants.PASSWORD_VIEW);
+	}
+	
+	@PostMapping("/password")
+	public String actualizarPassword(@ModelAttribute("clientePassword")ClienteModel clienteModelo) {
+		String redirect="";
+		Cliente cliente = clienteService.buscarCliente(clienteModelo.getCorreo());
+		if(cliente != null) {
+			cliente.setContraseña(clienteModelo.getContraseña());
+			cliente = clienteService.modificarPassword(cliente);
+			if(cliente != null){
+				passExitoso=Constants.MSG_EXITO;
+				redirect = Constants.LOGIN_VIEW;
+			}else {
+				redirect = Constants.PASSWORD_VIEW+"?error=t";
+			}
+		}else {
+			redirect = Constants.PASSWORD_VIEW+"?error=t";
 		}
 		return "redirect:/sally/"+redirect;
 	}

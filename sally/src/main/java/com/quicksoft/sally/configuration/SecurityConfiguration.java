@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/*","/fonts/*","/font-awesome/*","/img/landing/*","/js/*","/locales/*","/pdf/*","/sally/inicio","/sally/registro","/sally/cliente","/sally/login").permitAll()
+		http.authorizeRequests().antMatchers("/css/*","/fonts/*","/font-awesome/*","/img/landing/*","/js/*","/locales/*","/pdf/*","/sally/inicio","/sally/registro","/sally/cliente","/sally/login","/sally/password").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/sally/login").loginProcessingUrl("/sally/logincheck")
 		.usernameParameter("correo").passwordParameter("contraseña")
