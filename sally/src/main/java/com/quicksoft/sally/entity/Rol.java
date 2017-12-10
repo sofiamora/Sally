@@ -1,12 +1,12 @@
 package com.quicksoft.sally.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -24,20 +24,22 @@ public class Rol {
 	@Column(name="estatus")
 	private Integer estatus;
 	
-	@OneToMany(mappedBy="rol")
-	private List<Permiso> permisos;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_cliente")
+	private Cliente cliente;
 	
 	public Rol() {
 		
 	}
 	
-	public Rol(Integer idRol, String tipo, Integer estatus, List<Permiso> permisos) {
+	public Rol(Integer idRol, String tipo, Integer estatus, Cliente cliente) {
 		super();
 		this.idRol = idRol;
 		this.tipo = tipo;
 		this.estatus = estatus;
-		this.permisos = permisos;
+		this.cliente = cliente;
 	}
+
 
 	public Integer getIdRol() {
 		return idRol;
@@ -62,15 +64,5 @@ public class Rol {
 	public void setEstatus(Integer estatus) {
 		this.estatus = estatus;
 	}
-
-	public List<Permiso> getPermisos() {
-		return permisos;
-	}
-
-	public void setPermisos(List<Permiso> permisos) {
-		this.permisos = permisos;
-	}
-	
-	
 	
 }

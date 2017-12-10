@@ -32,34 +32,37 @@ public class Cliente {
 	@Column(name="sexo")
 	private String sexo;
 	
-	@Column(name="correo")
+	@Column(name="correo", unique=true)
 	private String correo;
 	
-	@Column(name="contraseña")
+	@Column(name="contraseña", length=60)
 	private String contraseña;
 	
 	@Column(name="edad")
 	private Integer edad;
 	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_rol")
-	private Rol rol;
+	@Column(name="activo")
+	private boolean enabled;
+	
+	@OneToMany(mappedBy = "cliente", fetch=FetchType.EAGER)
+	private List<Rol> roles;
+	
+	@OneToMany( mappedBy="cliente")
+	private List<Contacto> contactos;
+	
+	@OneToMany( mappedBy="cliente")
+	private List<Plantilla> plantillas;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_ocupacion")
 	private Ocupacion ocupacion;
 	
-	@OneToMany(mappedBy="cliente")
-	private List<Contacto> contactos;
-	
-	@OneToMany(mappedBy="cliente")
-	private List<Plantilla> plantillas;
-	
 	public Cliente() {
 	}
 	
 	public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String sexo,
-			String correo, String contraseña, Integer edad, Rol rol, Ocupacion ocupacion) {
+			String correo, String contraseña, Integer edad, boolean enabled, List<Rol> roles, List<Contacto> contactos,
+			List<Plantilla> plantillas, Ocupacion ocupacion) {
 		super();
 		this.idCliente = idCliente;
 		this.nombre = nombre;
@@ -69,9 +72,13 @@ public class Cliente {
 		this.correo = correo;
 		this.contraseña = contraseña;
 		this.edad = edad;
-		this.rol = rol;
+		this.enabled = enabled;
+		this.roles = roles;
+		this.contactos = contactos;
+		this.plantillas = plantillas;
 		this.ocupacion = ocupacion;
 	}
+
 	public Integer getIdCliente() {
 		return idCliente;
 	}
@@ -120,12 +127,27 @@ public class Cliente {
 	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
-	public Rol getRol() {
-		return rol;
+	
+	public List<Rol> getRoles() {
+		return roles;
 	}
-	public void setRol(Rol rol) {
-		this.rol = rol;
+
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
+
+
+	public List<Plantilla> getPlantillas() {
+		return plantillas;
+	}
+
+
+	public void setPlantillas(List<Plantilla> plantillas) {
+		this.plantillas = plantillas;
+	}
+
+
 	public Ocupacion getOcupacion() {
 		return ocupacion;
 	}
@@ -141,13 +163,14 @@ public class Cliente {
 		this.contactos = contactos;
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
-				+ ", apellidoMaterno=" + apellidoMaterno + ", sexo=" + sexo + ", correo=" + correo + ", contraseña="
-				+ contraseña + ", edad=" + edad + ", rol=" + rol + ", ocupacion=" + ocupacion + ", contactos="
-				+ contactos + ", plantillas=" + plantillas + "]";
+
+	public boolean isEnabled() {
+		return enabled;
 	}
-	
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	
 }

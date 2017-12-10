@@ -1,11 +1,11 @@
 package com.quicksoft.sally.service.Impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,18 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.quicksoft.sally.constants.InterfaceMessages;
 import com.quicksoft.sally.entity.Cliente;
+import com.quicksoft.sally.entity.Rol;
 import com.quicksoft.sally.repository.ClienteRepository;
 import com.quicksoft.sally.service.ClienteService;
 
@@ -32,7 +39,7 @@ import freemarker.template.TemplateNotFoundException;
 
 
 @Service("clienteService")
-public class ClienteImpl implements ClienteService{
+public class ClienteImpl implements ClienteService, UserDetailsService{
 	@Autowired
 	@Qualifier("clienteRepository")
 	private ClienteRepository clienteRepository;
@@ -48,6 +55,7 @@ public class ClienteImpl implements ClienteService{
 	@Override
 	public Cliente registrarCliente(Cliente cliente) {
 		logger.info("Registrando un cliente: "+System.currentTimeMillis());
+		cliente.setEnabled(true);
 		return clienteRepository.save(cliente);
 	}
 
@@ -140,4 +148,24 @@ public class ClienteImpl implements ClienteService{
 	        }
 	        return "";
 	    }
+
+	 //Autenticacion
+	@Override
+	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+		Cliente cliente = buscarCliente(correo);
+		List<GrantedAuthority> authorities = buildAuthorities(cliente.getRoles());
+		return buildUser(cliente, authorities);
+	}
+	
+	private User buildUser(Cliente cliente, List<GrantedAuthority> authorities) {
+		return new User(cliente.getCorreo(), cliente.getContraseña(), cliente.isEnabled(), 
+				true, true, true, authorities);
+	}
+	private List<GrantedAuthority> buildAuthorities(List<Rol> roles){
+		List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+		for(Rol rol:roles) {
+			permisos.add(new SimpleGrantedAuthority(rol.getTipo()));
+		}
+		return permisos;
+	}
 }

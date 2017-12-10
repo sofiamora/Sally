@@ -52,16 +52,10 @@ public class LandingController {
 		return new ModelAndView(Constants.LOGIN_VIEW);
 	}
 	
-	@PostMapping("/login")
-	public String loginPost(@ModelAttribute("clienteLogin")ClienteModel clienteModel) {
-		String redirect;
-		Cliente cliente = clienteService.login(clienteModel.getCorreo(),clienteModel.getContraseña());
-		if(cliente!=null) {
-			redirect = Constants.DASHBOARD_VIEW;
-		}else {
-			redirect = "sally/"+Constants.LOGIN_VIEW+"?error";
-		}
-		return "redirect:/"+redirect;
+	@GetMapping("/autenticacion")
+	public String loginPost() {
+		System.out.println("correcto");
+		return "redirect:/dashboard";
 	}
 	
 	@GetMapping("/registro")

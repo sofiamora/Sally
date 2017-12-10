@@ -18,7 +18,7 @@
             <div class="alert alert-info" th:if="${logout != null}">
                 ¡Sesión terminada con éxito, que tenga un buen día!
             </div>
-            <div class="alert alert-success" th:if="${success == 1}">
+            <div class="alert alert-success" th:if="${registroExitoso == 1}">
                 ¡Registro exitoso, ahora puedes iniciar sesión!
             </div>
             <div class="col-md-6">
@@ -41,12 +41,13 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <form class="m-t" role="form" action="#" method="post" th:action="@{/sally/login}" th:object="${clienteLogin}">
+                    <form class="m-t" role="form" action="#" method="post" th:action="@{/sally/logincheck}">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <div class="form-group">
-                            <input type="email" th:field="*{correo}" class="form-control" placeholder="Correo electrónico" required="true"/>
+                            <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" required="true"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" th:field="*{contraseña}" class="form-control" placeholder="Contraseña" required="true"/>
+                            <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Contraseña" required="true"/>
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
 
